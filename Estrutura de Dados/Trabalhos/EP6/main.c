@@ -4,13 +4,23 @@
 
 int main() {
 
-    int size1 = 5;
+    int size1 = 7;
     DynVec *dv1 = create_dynvec(size1);
-    dv1->vet[0] = 1; dv1->vet[1] = 2; dv1->vet[2] = 3; dv1->vet[3] = 4; dv1->vet[4] = 5;
+    dv1->vet[0] = 1; dv1->vet[1] = 2; dv1->vet[2] = 3; dv1->vet[3] = 4; dv1->vet[4] = 5; dv1->vet[5] = 7; dv1->vet[6] = 9;
 
     int size2 = 3;
     DynVec *dv2 = create_dynvec(size2);
     dv2->vet[0] = 3; dv2->vet[1] = 4; dv2->vet[2] = 5;
+
+    printf("Vetor 1: ");
+    for (int i = 0; i < (size1); i++) {
+        printf("%d ", (dv1->vet)[i]);}
+    printf("\n");
+
+    printf("Vetor 2: ");
+    for (int i = 0; i < (size2); i++) {
+        printf("%d ", (dv2->vet)[i]);}   
+    printf("\n");
 
     // Teste da união dos vetores
     DynVec *unionResult = dv_union(dv1, dv2);

@@ -13,6 +13,6 @@ DynVec* create_dynvec(int size);
 DynVec *dv_intersection(DynVec *dv1, DynVec *dv2);
 
 // Retorna um vetor com a união dos elementos de dv1 e dv2
-DynVec *dv_union(DynVec *dv1, DynVec *dv2)
+DynVec *dv_union(DynVec *dv1, DynVec *dv2);
 
 #endif
