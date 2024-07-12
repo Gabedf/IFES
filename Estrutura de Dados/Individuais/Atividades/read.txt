@@ -1,0 +1,1 @@
+Here I have exercises that I do to practice and learn C and Data Structure. These exercises are all from a PDF used in my classes in college.
