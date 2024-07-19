@@ -22,7 +22,7 @@ int main() {
         printf("%d ", (dv2->vet)[i]);}   
     printf("\n");
 
-    // Teste da união dos vetores
+    // Testando união dos vetores 
     DynVec *unionResult = dv_union(dv1, dv2);
     printf("União dos vetores dv1 e dv2:\n");
     printf("Tamanho: %d\n", unionResult->size);
@@ -32,7 +32,7 @@ int main() {
     }
     printf("\n\n");
 
-    // Teste da intersecção dos vetores
+    // Testando intersecção dos vetores
     DynVec *intersectionResult = dv_intersection(dv1, dv2);
     printf("Interseção dos vetores dv1 e dv2:\n");
     printf("Tamanho: %d\n", intersectionResult->size);
