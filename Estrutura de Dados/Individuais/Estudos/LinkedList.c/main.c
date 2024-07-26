@@ -1,126 +1,154 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// For now, just to make my life easier, i'm putting all functions here and will change it ASAP
-typedef struct list List;   
-typedef struct start Start;   
-struct start 
-{
-    struct List *first;
-};
+// For now, just to make my life easier, I'm putting all functions here and will change it ASAP
+
+typedef struct list List;
+typedef struct node Node;
 
 struct list 
 {
-    int value;      
-    struct list *next; 
+    Node *first;
 };
 
-
-Start *create_List() 
+struct node 
 {
-    Start *l = (Start*)(malloc(sizeof(Start)));
+    int value;
+    Node *next;
+};
+
+List *create_List() 
+{
+    List *l = (List*)(malloc(sizeof(List)));
     l->first = NULL;
     return l;
 }
 
-List *insert_list(List *l, int i) 
+void insert_list(List *l, int i) 
 {
-    List *new = (List*)(malloc(sizeof(List)));
+    Node *new = (Node*)(malloc(sizeof(Node)));
     new->value = i;
-    new->next = l;
-    return new;
+    new->next = l->first;
+    l->first = new;
 }
 
-List *insert_elements(List *l) 
+void insert_elements(List *l) 
 {
     int answer, value;
-    printf("Do you wanna add an element?\n\n1 - Yes\n0 - No\n\n");
+    printf("Do you want to add an element?\n\n1 - Yes\n0 - No\n\n");
     scanf("%d", &answer);
 
     while (answer) 
     {
         printf("Enter a value to add: ");
         scanf("%d", &value);
-        l = insert_list(l, value);
-        printf("Do you wanna add an element?\n\n1 - Yes\n2 - No\n\n");
+        insert_list(l, value);
+        printf("Do you want to add another element?\n\n1 - Yes\n0 - No\n\n");
         scanf("%d", &answer);
     }
-
-    return l;
 }
 
 void print_list(List *l) 
 {
-    List *current = l;
-    while (current->next != NULL) 
+    for (Node *p = l->first; p != NULL; p = p->next) 
     {
-        printf("%d ", current->value);
-        current = current->next;
+        printf("%d ", p->value);
     }
     printf("\n");
 }
 
 int list_size(List *l) {
     int size = 0;
-    List *current = l;
-    while (current->next != NULL) 
+    Node *p = l->first;
+    while (p != NULL)
     {
         size++;
-        current = current->next;
+        p = p->next;
     }
     return size;
 }
 
-int verify_value(List *l, int value) {
-    while (l->next != NULL) {
-        if (l->value == value) {return 1;}
-        l = l->next;
+int verify_value(List *l, int value)
+{
+    Node *p = l->first;
+    while (p != NULL)
+    {
+        if (p->value == value)
+            return 1;
+        p = p->next;
     }
     return 0;
 }
 
-int isEmpity(List *l) {
-    if (l->first == NULL) {return 0;}
-    return 1;
+int isEmpty(List *l) {
+    if (l->first == NULL) {return 1;}
+    return 0;
 }
 
-int remove_value(List *l, int value) {
-    List *x = l->next;
-    List *prev = NULL;
+int remove_value(List *l, int value)
+{
+    Node *p = l->first;
+    Node *prev = NULL;
 
-    while (x != NULL) 
+    while (p != NULL)
     {
-        if (x->value == value) 
+        if (p->value == value)
         {
-            if (prev == NULL) {l = x->next;}
-            else {prev->first = x->next;}
-            free(x);
+            // For the case of the value being in the first node of the list
+            if (prev == NULL)
+                l->first = p->next;
+            else
+                prev->next = p->next;
+            free(p);
             return 1;
         }
-        else 
+        else
         {
-            prev = x;
-            x = x->next;
+            prev = p;
+            p = p->next;
         }
     }
+
     return 0;
+}
+
+void remove_all_values(List *l, int value)
+{
+    while (remove_value(l, value)) { /* Remove all occurrences */ }
 }
 
 int main() 
 {
+    int size = 0, here, remove, response, v;
     List *l = create_List();
-    l = insert_elements(l);
+    insert_elements(l);
     print_list(l);
 
-    int size = 0, here, remove;
-    here = verify_value(l, 88);
+    // Check if value exists in list
+    printf("Do you want to check if a value exists in the list?\n0 - No\n1 - Yes\nResponse: ");
+    scanf("%d", &response);
+    if (response) 
+    {
+        printf("Enter the value you want to check: ");
+        scanf("%d", &v);
+        here = verify_value(l, v);
+        if (here) {printf("Value found.\n");}
+        else {printf("Value not found.\n");}
+    }
+
+    // Remove value from list
+    printf("Do you want to remove a value from the list?\n0 - No\n1 - Yes\n2 - Yes, remove all occurrences\nResponse: ");
+    scanf("%d", &response);
+    if (response) 
+    {
+        printf("Enter the value you want to remove: ");
+        scanf("%d", &remove);
+        if (response == 1) {remove_value(l, remove);}
+        else {remove_all_values(l, remove);}
+    }
+    print_list(l);
     size = list_size(l);
-    printf("Tamanho da lista: %d\nValor está na lista? %d\n", size, here);
+    printf("The size of the list is: %d\n", size);
 
-    printf("Digite o valor da lista a remover: ");
-    scanf("%d", &remove);
-    here = remove_value(l, remove);
-    print_list(l);
     return 0;
-     
 }

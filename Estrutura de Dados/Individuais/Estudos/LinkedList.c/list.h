@@ -17,12 +17,18 @@ List *insert_elements(List *l);
 void print_list(List *l);
 
 // Return the size of a list
-int list_size(List *l) 
+int list_size(List *l);
 
 // Verify is a value is on the list
 int verify_value(List *l, int value);
 
 // Verify is the list is empity
-int isEmpity(List *l)
+int isEmpity(List *l);
+
+// Remove a value of the list
+int remove_value(List *l, int value);
+
+// Remove every value of the list
+void remove_all_values(List *l, int values);
 
 #endif

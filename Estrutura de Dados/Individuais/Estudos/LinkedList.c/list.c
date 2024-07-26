@@ -103,3 +103,8 @@ int remove_value(List *l, int value) {
     }
     return 0;
 }
+
+void remove_all_values(List *l, int values)
+{
+    while (remove_value(l, v)) {remove_value(l, v)};
+}
