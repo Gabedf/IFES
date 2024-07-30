@@ -89,11 +89,8 @@ int remove_value(List *l, int value)
     {
         if (p->value == value)
         {
-            // For the case of the value being in the first node of the list
-            if (prev == NULL)
-                l->first = p->next;
-            else
-                prev->next = p->next;
+            if (prev == NULL) {l->first = p->next;} // For the case of the value being in the first node of the list
+            else {prev->next = p->next;}
             free(p);
             return 1;
         }
