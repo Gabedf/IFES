@@ -1,8 +1,8 @@
 #ifndef LIST
 #define LIST
 
-typedef struct list List;   
-typedef struct start Start;   
+typedef struct list List;
+typedef struct node Node;
 
 // Create a new linked list    
 List *create_list();

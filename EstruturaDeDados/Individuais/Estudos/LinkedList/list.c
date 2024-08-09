@@ -2,20 +2,20 @@
 #include <stdlib.h>
 #include "list.h"
 
-struct start 
-{
-    struct List *first;
-};
-
 struct list 
 {
-    int value;      
-    struct list *next; 
+    Node *first;
+};
+
+struct node 
+{
+    int value;
+    Node *next;
 };
 
 List *create_List() 
 {
-    Start *l = (Start*)(malloc(sizeof(Start)));
+    List *l = (List*)(malloc(sizeof(List)));
     l->next = NULL;
     return l;
 }
@@ -89,7 +89,7 @@ int remove_value(List *l, int value)
     {
         if (p->value == value)
         {
-            if (prev == NULL) {l->first = p->next;} // For the case of the value being in the first node of the list
+            if (prev == NULL) {l->first = p->next;} 
             else {prev->next = p->next;}
             free(p);
             return 1;
