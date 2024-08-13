@@ -32,6 +32,6 @@ int remove_value(LinkedList *l, int value);
 void remove_all_values(LinkedList *l, int values);
 
 // Concatenate two linkedLists
-LinkedList *ll_concatenated(List *l1, List *l2);
+LinkedList *ll_concatenated(LinkedList *l1, LinkedList *l2);
 
 #endif

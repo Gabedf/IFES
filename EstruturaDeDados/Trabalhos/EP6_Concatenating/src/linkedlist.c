@@ -13,10 +13,10 @@ struct node
     Node *next;
 };
 
-LinkedList *create_List() 
+LinkedList *create_list() 
 {
     LinkedList *l = (LinkedList*)(malloc(sizeof(LinkedList)));
-    l->next = NULL;
+    l->first = NULL;
     return l;
 }
 
@@ -105,11 +105,11 @@ int remove_value(LinkedList *l, int value)
 
 void remove_all_values(LinkedList *l, int values)
 {
-    while (remove_value(l, v)) {remove_value(l, v)};
+    while (remove_value(l, values)) {remove_value(l, values);}
 }
 
-LinkedList *ll_concatenated(List *l1, List *l2) {
-    List *l3 = create_list();
+LinkedList *ll_concatenated(LinkedList *l1, LinkedList *l2) {
+    LinkedList *l3 = create_list();
     Node *p = l1->first;
     while (p != NULL) 
         {

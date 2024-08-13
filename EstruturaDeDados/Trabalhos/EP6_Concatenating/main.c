@@ -3,8 +3,8 @@
 #include "linkedlist.h"  
 
 int main() {
-    List *l1 = create_list();
-    List *l2 = create_list();
+    LinkedList *l1 = create_list();
+    LinkedList *l2 = create_list();
 
     // Add element to the first list
     insert_list(l1, 12);
@@ -21,9 +21,9 @@ int main() {
     insert_list(l2, 42);
 
     // Concatenating
-    List *l3 = ll_concatenated(l, l2);
+    LinkedList *l3 = ll_concatenated(l1, l2);
     printf("L1: ");
-    print_list(l);
+    print_list(l1);
     printf("L2: ");
     print_list(l2);
     printf("L3: ");
