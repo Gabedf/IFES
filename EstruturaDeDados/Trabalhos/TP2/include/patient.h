@@ -1,5 +1,5 @@
-#ifndef PATIENT
-#define PATIENT
+#ifndef MY_PATIENT
+#define MY_PATIENT
 
 typedef struct patient Patient;
 typedef struct p_queu pQueue;
@@ -22,14 +22,16 @@ struct p_node
 {
     Patient *patient;
     pNode *next;
-}
+};
 
 // 
-Patient *create_patient(int id, const char name);
+Patient *create_patient(int id, const char *name);
 
 // 
 pQueue *create_Queue();
 
 //
 void insertPatient(pQueue *q, Patient *p);
+
+void savePatient(Patient *patient);
 #endif
