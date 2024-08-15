@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <patient.h>
+#include "patient.h"
 
 Patient *create_patient(int id, const char *name) 
 {
@@ -44,7 +44,7 @@ void savePatient(Patient *patient) {
         return;
     }
 
-    fprintf(file, "%d %s %s", *patient.id, *patient.name);
+    fprintf(file, "%d, %s\n", patient->id, patient->name);
 
     fclose(file);
 }
