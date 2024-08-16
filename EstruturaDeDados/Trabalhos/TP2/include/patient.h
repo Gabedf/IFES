@@ -9,6 +9,7 @@ struct patient
 {
     int id;
     char name[100];
+    time_t arrival_time;
 };
 
 struct p_queu
@@ -25,7 +26,7 @@ struct p_node
 };
 
 // 
-Patient *create_patient(int id, const char *name);
+Patient *create_patient(int id, const char *name, time_t arrival_time);
 
 // 
 pQueue *create_Queue();
@@ -33,5 +34,7 @@ pQueue *create_Queue();
 //
 void insertPatient(pQueue *q, Patient *p);
 
+//
 void savePatient(Patient *patient);
+
 #endif

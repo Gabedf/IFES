@@ -2,15 +2,17 @@
 #include <stdlib.h>
 #include <string.h>
 #include "patient.h"
+#include <time.h>
 
-Patient *create_patient(int id, const char *name) 
+Patient *create_patient(int id, const char *name, time_t arrival_time) 
 {
     Patient *p = (Patient *)malloc(sizeof(Patient));
     if (p == NULL) {exit(1);}
 
     p->id = id;
+    p->arrival_time = arrival_time;
     strcpy(p->name, name);
-
+    
     return p;
 }
 
