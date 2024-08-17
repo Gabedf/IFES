@@ -5,7 +5,7 @@
 #include <time.h>
 
 int determine_condition() {
-    float random_value = (float)rand() / RAND_MAX;
+    float random_value = ((float)rand()) / RAND_MAX;
     
     if (random_value < 0.3) return 1;   // Saúde Normal
     if (random_value < 0.5) return 2;   // Bronquite
@@ -37,7 +37,7 @@ int empity(ExamList *el)
     if (el->counter == 0) {return 1;}
 }
 
-void insertMachine(ExamList *el, pQueue *q)
+void insertMachine(ExamList *el, pQueue *q, int current_time)
 {
     ExamNode *node = (ExamNode*)(malloc(sizeof(ExamNode)));
     node->severity = 0;
@@ -55,7 +55,9 @@ void insertMachine(ExamList *el, pQueue *q)
     {
         if (el->counter == 0) {el->front = node;}
         else {el->rear->next = node;}
-        
+    
+        node->start_time = current_time;
+        node->severity = determine_condition();
         node->patient = q->front;
         q->front = q->front->next;
         node->patient->next = NULL;

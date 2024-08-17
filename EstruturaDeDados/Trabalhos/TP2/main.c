@@ -1,38 +1,47 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "patient.h"
 #include "machine_manager.h"
+#include "patient.h"
 
 int main() {
-    // Inicializar fila de pacientes e lista de exames
+    ExamList *examList = createExamList();
     pQueue *patientQueue = create_Queue();
-    ExamList *machineList = createExamList();
 
-    // Simular tempo
     int current_time = 0;
-    
-    // Criar alguns pacientes e inseri-los na fila
-    time_t arrival_time = time(NULL);
-    insertPatient(patientQueue, create_patient(1, "John Doe", arrival_time));
-    insertPatient(patientQueue, create_patient(2, "Jane Smith", arrival_time + 1));
-    insertPatient(patientQueue, create_patient(3, "Bob Brown", arrival_time + 2));
 
-    // Simular alocação de pacientes nas máquinas
-    while (patientQueue->counter > 0 || machineList->counter > 0) {
-        printf("Current Time: %d\n", current_time);
-
-        // Inserir paciente na máquina se disponível
-        insertMachine(machineList, patientQueue);
-
-        // Atualizar status dos exames
-        updateExamStatus(machineList, current_time);
-
-        // Incrementar o tempo
+    while (1) {
+        // Atualiza o tempo atual
         current_time++;
+
+        // 20% de chance de chegar um novo paciente
+        if (rand() % 100 < 20) {
+            int patient_id;
+            char patient_name[100];
+
+            printf("Novo paciente chegou! Insira os dados:\n");
+            printf("ID do Paciente: ");
+            scanf("%d", &patient_id);
+            printf("Nome do Paciente: ");
+            scanf("%s", patient_name);
+
+            Patient *new_patient = create_patient(patient_id, patient_name, current_time);
+            insertPatient(patientQueue, new_patient);
+
+            printf("Paciente %d (%s) foi adicionado à fila no tempo %d.\n", patient_id, patient_name, current_time);
+        }
+
+        // Aloca pacientes em máquinas, se disponíveis
+        insertMachine(examList, patientQueue);
+
+        // Atualiza status dos exames (remove exames concluídos)
+        updateExamStatus(examList, current_time);
+
+        // Simula o tempo passando (1 minuto = 1 unidade de tempo)
+        // Pode-se adicionar um delay de 1 segundo para simular o tempo real.
+        // Para evitar "sleep", comente a linha abaixo se estiver compilando para testes rápidos.
+        // sleep(1);
     }
 
-    // Finalizar
-    printf("All patients have been processed.\n");
     return 0;
 }
