@@ -21,7 +21,10 @@ int determine_condition() {
 ExamList *createExamList() 
 {
     ExamList *el = (ExamList*)(malloc(sizeof(ExamList)));
-    if (el == NULL) {exit(1);}
+    if (el == NULL) {
+        fprintf(stderr, "Erro ao alocar memória para a fila.\n");
+        exit(EXIT_FAILURE);
+    }
     el->front = el->rear = NULL;
     el->counter = 0;
     return el;
@@ -29,19 +32,24 @@ ExamList *createExamList()
 
 int full(ExamList *el) 
 {
-    if (el->counter == 5) {return 1;}
+    return el->counter == 5;
 }
 
 int empity(ExamList *el) 
 {
-    if (el->counter == 0) {return 1;}
+    return el->counter == 0;
 }
 
 void insertMachine(ExamList *el, pQueue *q, int current_time)
 {
     ExamNode *node = (ExamNode*)(malloc(sizeof(ExamNode)));
+    if (node == NULL) {
+        fprintf(stderr, "Erro ao alocar memória para a fila.\n");
+        exit(EXIT_FAILURE);
+    }
+    
     node->severity = 0;
-    node->start_time = 0;
+    node->start_time = current_time;
     node->next = NULL;
     node->patient = NULL;
 
@@ -51,21 +59,20 @@ void insertMachine(ExamList *el, pQueue *q, int current_time)
         return;
     }
 
-    if (!full(el))
-    {
-        if (el->counter == 0) {el->front = node;}
-        else {el->rear->next = node;}
+    if (full(el) || q->front == NULL) {return; }
+
+    if (el->counter == 0) {el->front = node;}
+    else {el->rear->next = node;}
     
-        node->start_time = current_time;
-        node->severity = determine_condition();
-        node->patient = q->front;
-        q->front = q->front->next;
-        node->patient->next = NULL;
-        
-        el->rear = node;
-        el->counter++;
-        q->counter--;
-    }
+    node->start_time = current_time;
+    node->severity = determine_condition();
+    node->patient = q->front;
+    q->front = q->front->next;
+    node->patient->next = NULL;
+
+    el->rear = node;
+    el->counter++;
+    q->counter--;
 }
 
 void updateExamStatus(ExamList *el, int current_time) 

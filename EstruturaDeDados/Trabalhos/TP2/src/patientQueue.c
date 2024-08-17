@@ -4,10 +4,13 @@
 #include "patient.h"
 #include <time.h>
 
-Patient *create_patient(int id, const char *name, time_t arrival_time) 
+Patient *create_patient(int id, const char *name, int arrival_time) 
 {
     Patient *p = (Patient *)malloc(sizeof(Patient));
-    if (p == NULL) {exit(1);}
+    if (p == NULL) {
+        fprintf(stderr, "Erro ao alocar memória para a fila.\n");
+        exit(EXIT_FAILURE);
+    }
 
     p->id = id;
     p->arrival_time = arrival_time;
@@ -19,7 +22,10 @@ Patient *create_patient(int id, const char *name, time_t arrival_time)
 pQueue *create_Queue() 
 {
     pQueue *q = (pQueue*)(malloc(sizeof(pQueue)));
-    if (q == NULL) {exit(1);}
+    if (q == NULL) {
+        fprintf(stderr, "Erro ao alocar memória para a fila.\n");
+        exit(EXIT_FAILURE);
+    }
     q->front = q->rear = NULL;
     q->counter = 0;
     return q;
@@ -28,6 +34,10 @@ pQueue *create_Queue()
 void insertPatient(pQueue *q, Patient *p)
 {
     pNode *node = (pNode*)(malloc(sizeof(pNode)));
+    if (node == NULL) {
+        fprintf(stderr, "Erro ao alocar memória para a fila.\n");
+        exit(EXIT_FAILURE);
+    }
     node->patient = p;
     node->next = NULL;
 

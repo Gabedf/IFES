@@ -27,7 +27,7 @@ struct p_node
 };
 
 // 
-Patient *create_patient(int id, const char *name, time_t arrival_time);
+Patient *create_patient(int id, const char *name, int arrival_time);
 
 // 
 pQueue *create_Queue();

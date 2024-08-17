@@ -29,7 +29,7 @@ int full(ExamList *el);
 
 int empity(ExamList *el);
 
-void insertMachine(ExamList *el, pQueue *q);
+void insertMachine(ExamList *el, pQueue *q, int current_time);
 
 void updateExamStatus(ExamList *el, int current_time);
 
