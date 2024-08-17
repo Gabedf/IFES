@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "machine_manager.h"
 #include "patient.h"
 #include <time.h>
@@ -17,21 +18,21 @@ int determine_condition() {
     return 6;                           // Câncer de pulmão
 }
 
-examList *createExamList() 
+ExamList *createExamList() 
 {
-    examList *el = (examList*)(malloc(sizeof(examList)));
+    ExamList *el = (ExamList*)(malloc(sizeof(ExamList)));
     if (el == NULL) {exit(1);}
     el->front = el->rear = NULL;
     el->counter = 0;
     return el;
 }
 
-int full(examList *el) 
+int full(ExamList *el) 
 {
     if (el->counter == 5) {return 1;}
 }
 
-int empity(examList *el) 
+int empity(ExamList *el) 
 {
     if (el->counter == 0) {return 1;}
 }
@@ -41,7 +42,8 @@ void insertMachine(ExamList *el, pQueue *q)
     ExamNode *node = (ExamNode*)(malloc(sizeof(ExamNode)));
     node->severity = 0;
     node->start_time = 0;
-    node->next = node->patient = NULL;
+    node->next = NULL;
+    node->patient = NULL;
 
     if (q->rear == NULL) 
     {   
@@ -60,20 +62,20 @@ void insertMachine(ExamList *el, pQueue *q)
         
         el->rear = node;
         el->counter++;
-        p->counter--;
+        q->counter--;
     }
 }
 
 void updateExamStatus(ExamList *el, int current_time) 
 {
-    if (el->counter == 0) {return};
+    if (el->counter == 0) {return;}
 
     ExamNode *prev = NULL;
     ExamNode *node = el->front;
 
     while (node != NULL) 
     {
-        if ((current_time - node->start_time) >= DURACAO_EXAME) 
+        if ((current_time - node->start_time) >= EXAM_DURATION) 
         {
             
             if (prev == NULL) {el->front = node->next;} 

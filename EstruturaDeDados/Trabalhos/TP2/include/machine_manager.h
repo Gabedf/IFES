@@ -1,32 +1,33 @@
 #ifndef MY_MACHINE
 #define MY_MACHINE
 #define EXAM_DURATION 10
+#include "patient.h"
 
-typedef struct exam ExamList;
+typedef struct exam_list ExamList;
 typedef struct exam_node ExamNode;
 
 struct exam_list 
 {
     int counter;
-    examNode *front;
-    examNode *rear;
+    ExamNode *front;
+    ExamNode *rear;
 };
 
-struct exame_node 
+struct exam_node 
 {
-    Patient *patient;
-    examNode *next;
+    pNode *patient;
+    ExamNode *next;
     int severity;
     int start_time;
 };
 
 int determine_condition();
 
-examList *createExamList();
+ExamList *createExamList();
 
-int full(examList *el);
+int full(ExamList *el);
 
-int empity(examList *el);
+int empity(ExamList *el);
 
 void insertMachine(ExamList *el, pQueue *q);
 

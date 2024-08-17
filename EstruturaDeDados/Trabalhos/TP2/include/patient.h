@@ -1,5 +1,6 @@
 #ifndef MY_PATIENT
 #define MY_PATIENT
+#include <time.h>
 
 typedef struct patient Patient;
 typedef struct p_queu pQueue;
