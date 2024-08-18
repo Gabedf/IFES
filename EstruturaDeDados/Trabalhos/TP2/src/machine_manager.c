@@ -8,14 +8,14 @@ int determine_condition() {
     float random_value = ((float)rand()) / RAND_MAX;
     
     if (random_value < 0.3) return 1;   // Saúde Normal
-    if (random_value < 0.5) return 2;   // Bronquite
-    if (random_value < 0.6) return 3;   // Pneumonia
-    if (random_value < 0.7) return 4;   // COVID
-    if (random_value < 0.75) return 4;  // Embolia pulmonar
-    if (random_value < 0.80) return 4;  // Derrame pleural
-    if (random_value < 0.85) return 5;  // Fibrose pulmonar
-    if (random_value < 0.90) return 5;  // Tuberculose
-    return 6;                           // Câncer de pulmão
+    if (random_value < 0.2) return 2;   // Bronquite
+    if (random_value < 0.1) return 3;   // Pneumonia
+    if (random_value < 0.1) return 4;   // COVID
+    if (random_value < 0.05) return 5;  // Embolia pulmonar
+    if (random_value < 0.05) return 6;  // Derrame pleural
+    if (random_value < 0.05) return 7;  // Fibrose pulmonar
+    if (random_value < 0.05) return 8;  // Tuberculose
+    return 9;                           // Câncer de pulmão
 }
 
 ExamList *createExamList() 

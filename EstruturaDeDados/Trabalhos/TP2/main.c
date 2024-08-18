@@ -28,7 +28,7 @@ int main() {
 
             printf("Paciente %d (%s) foi adicionado à fila no tempo %d.\n", patient_id, patient_name, current_time);
 
-            printf("Digite '0' caso deseja encerrar ou '1' para continuar: ");
+            printf("\nDigite '0' caso deseja encerrar ou '1' para continuar: ");
             scanf("%d", &end);
             if (end == 0)  {break;}
         }
