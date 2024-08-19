@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "patient.h"
+#include "examNode.h"
 #include <time.h>
 
 Patient *create_patient(int id, const char *name, int arrival_time) 
@@ -59,4 +60,17 @@ void savePatient(Patient *patient) {
     fprintf(file, "%d, %s\n", patient->id, patient->name);
 
     fclose(file);
+}
+
+void printPq(pQueue *pq) 
+{
+    if (pq->counter > 0) 
+    {
+        printf("Lista pacientes:\n");
+        for (pNode *p = pq->front; p != NULL; p = p->next) 
+        {
+            printf("Nome - %s | ID - %d\n", p->patient->name, p->patient->id);
+        }
+        printf("\n"); 
+    }
 }

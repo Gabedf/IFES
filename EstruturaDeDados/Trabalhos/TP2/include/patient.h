@@ -10,7 +10,7 @@ struct patient
 {
     int id;
     char name[100];
-    time_t arrival_time;
+    int arrival_time;
 };
 
 struct p_queu
@@ -37,5 +37,7 @@ void insertPatient(pQueue *q, Patient *p);
 
 //
 void savePatient(Patient *patient);
+
+void printPq(pQueue *pq);
 
 #endif

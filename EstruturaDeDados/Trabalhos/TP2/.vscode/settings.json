@@ -1,6 +1,11 @@
 {
     "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "time.h": "c",
+        "machinemanager.h": "c",
+        "patient.h": "c",
+        "examnode.h": "c",
+        "typeinfo": "c"
     }
 }
