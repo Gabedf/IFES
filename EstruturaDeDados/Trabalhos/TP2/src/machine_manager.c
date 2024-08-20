@@ -1,24 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 #include "examNode.h"
 #include "machineManager.h"
 #include "patient.h"
 #include "examPriority.h"
-
-int determine_condition() {
-    float random_value = ((float)rand()) / RAND_MAX;
-    
-    if (random_value < 0.3) return 1;   // Saúde Normal
-    if (random_value < 0.5) return 2;   // Bronquite
-    if (random_value < 0.6) return 3;   // Pneumonia
-    if (random_value < 0.7) return 4;   // COVID
-    if (random_value < 0.75) return 4;  // Embolia pulmonar
-    if (random_value < 0.80) return 4;  // Derrame pleural
-    if (random_value < 0.85) return 5;  // Fibrose pulmonar
-    if (random_value < 0.90) return 5;  // Tuberculose
-    return 6;                           // Câncer de pulmão
-}
+#include "condition.h"
 
 ExamList *createExamList() 
 {
@@ -84,7 +72,9 @@ void updateExamStatus(ExamList *el, ExamPriority *ep, int current_time)
     {
         if ((current_time - node->start_time) >= EXAM_DURATION) 
         {
-            node->severity = determine_condition();
+            int conditionV = determine_condition();
+            char *conditionName = condition(conditionV);
+            node->severity = determine_severity(conditionV);
 
             if (prev == NULL) {
                 el->front = node->next;
@@ -105,10 +95,12 @@ void updateExamStatus(ExamList *el, ExamPriority *ep, int current_time)
             }
 
             priorityNode->patient = node->patient;
+            priorityNode->conditionV = conditionV;
             priorityNode->severity = node->severity;
+            strcpy(priorityNode->condition, conditionName);
 
             insertPriority(ep, priorityNode);
-
+            saveCondition(priorityNode);
             node = (prev == NULL) ? el->front : prev->next;
         } 
         else 
@@ -126,7 +118,7 @@ void printMachine(ExamList *el)
         printf("Lista máquinas:\n");
         for (ExamNode *p = el->front; p != NULL; p = p->next) 
         {
-            printf("Nome - %s | Severity - %d\n", p->patient->patient->name, p->severity);
+            printf("Nome - %s;\n", p->patient->patient->name);
         }
         printf("\n");
     }

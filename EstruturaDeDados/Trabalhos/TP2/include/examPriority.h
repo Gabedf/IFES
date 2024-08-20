@@ -16,6 +16,8 @@ struct priorityNode {
     pNode *patient;
     PriorityNode *next;
     int severity;
+    char condition[30];
+    int conditionV;
 };
 
 ExamPriority *createPriorityList();
@@ -23,5 +25,7 @@ ExamPriority *createPriorityList();
 void insertPriority(ExamPriority *ep, PriorityNode *node);
 
 void printPritority(ExamPriority *ep);
+
+void saveCondition(PriorityNode *priorityNode);
 
 #endif

@@ -15,8 +15,6 @@ struct exam_list {
     ExamNode *rear;
 };
 
-int determine_condition();
-
 ExamList *createExamList();
 
 int full(ExamList *el);

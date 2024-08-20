@@ -6,6 +6,12 @@
         "machinemanager.h": "c",
         "patient.h": "c",
         "examnode.h": "c",
-        "typeinfo": "c"
+        "typeinfo": "c",
+        "stdio.h": "c",
+        "exampriority.h": "c",
+        "array": "c",
+        "deque": "c",
+        "vector": "c",
+        "string_view": "c"
     }
 }

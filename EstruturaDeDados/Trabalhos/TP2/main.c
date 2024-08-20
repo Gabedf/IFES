@@ -5,11 +5,13 @@
 #include "machineManager.h"
 #include "patient.h"
 #include "examPriority.h"
+#include "report.h"
 
 int main() {
     ExamList *examList = createExamList();
     pQueue *patientQueue = create_Queue();
     ExamPriority *examPriority = createPriorityList();
+    Report *report = new_report();
     int current_time = 0, end = 1, patient_id = 0;
 
     while (1) {
@@ -30,6 +32,9 @@ int main() {
             printPq(patientQueue);
             printMachine(examList);
             printPritority(examPriority);
+            insert_report(examPriority, report, current_time, examPriority->front->patient->patient->id);
+            print_report(report);
+            
             printf("\nDigite '0' caso deseja encerrar ou '1' para continuar: ");
             scanf("%d", &end);
             if (end == 0)  {break;}

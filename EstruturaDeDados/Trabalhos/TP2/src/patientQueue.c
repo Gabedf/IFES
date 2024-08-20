@@ -57,7 +57,7 @@ void savePatient(Patient *patient) {
         return;
     }
 
-    fprintf(file, "%d, %s\n", patient->id, patient->name);
+    fprintf(file, "ID: %d, NAME: %s\n", patient->id, patient->name);
 
     fclose(file);
 }

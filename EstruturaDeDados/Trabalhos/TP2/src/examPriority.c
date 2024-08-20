@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "examPriority.h"
+#include "machineManager.h"
 #include "examNode.h"
 #include "patient.h"
+#include "report.h"
 
 ExamPriority *createPriorityList() 
 {
@@ -19,9 +21,9 @@ ExamPriority *createPriorityList()
 void insertPriority(ExamPriority *ep, PriorityNode *node)
 {
     node->next = NULL;
-    if (ep->front == NULL) {
-        ep->front = ep->rear = node;
-    } else {
+    if (ep->front == NULL) {ep->front = ep->rear = node;} 
+    else 
+    {
         PriorityNode *current = ep->front;
         PriorityNode *prev = NULL;
 
@@ -52,9 +54,22 @@ void printPritority(ExamPriority *ep)
         printf("Lista prioridade:\n");
         for (PriorityNode *p = ep->front; p != NULL; p = p->next) 
         {
-            printf("Nome - %s | Severity - %d\n", p->patient->patient->name, p->severity);
+            printf("Nome - %s | Condition - %s | Severity - %d\n", p->patient->patient->name, p->condition, p->severity);
         }
         printf("\n"); 
     }
 
+}
+
+void saveCondition(PriorityNode *priorityNode) {
+    FILE *file = fopen("db_exam.txt", "a");
+
+    if (file == NULL) {
+        printf("Erro ao abrir o arquivo.\n");
+        return;
+    }
+
+    fprintf(file, "ID: %d, CONDITION: %s, SEVERITY: %d\n", priorityNode->patient->patient->id, priorityNode->condition,  priorityNode->severity);
+
+    fclose(file);
 }

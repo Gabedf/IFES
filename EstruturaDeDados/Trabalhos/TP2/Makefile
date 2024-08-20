@@ -20,7 +20,7 @@ TARGET = main
 MAIN = main.c
 
 # Source files: main file plus the relevant .c files from the source directory
-SRCS = $(MAIN) $(SRC_DIR)/patientQueue.c $(SRC_DIR)/machine_manager.c $(SRC_DIR)/examPriority.c
+SRCS = $(MAIN) $(SRC_DIR)/patientQueue.c $(SRC_DIR)/machine_manager.c $(SRC_DIR)/examPriority.c $(SRC_DIR)/condition.c $(SRC_DIR)/report.c 
 
 # Rule to link source files and create the executable (target)
 $(TARGET): $(SRCS)
