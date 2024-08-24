@@ -1,0 +1,7 @@
+*MATÉRIAS*
+
+_Algebra Linear_
+- Determinantes - 2h40m; 
+- Vetores no R2 e R3;
+- Espaço Vetorial - 1h04m;
+- Subespaço vetorial 1h38m;
