@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+
+#include "oftenReport.h"
 #include "examNode.h"
 #include "machineManager.h"
 #include "patient.h"
@@ -30,7 +32,7 @@ int empty(ExamList *el)
     return el->counter == 0;
 }
 
-void insertMachine(ExamList *el, pQueue *q, int current_time) {
+void insertMachine(ExamList *el, pQueue *q, int current_time, OftenReport *of) {
     if (full(el) || q->front == NULL) {
         return;
     }
@@ -59,9 +61,10 @@ void insertMachine(ExamList *el, pQueue *q, int current_time) {
     el->rear = node;
     el->counter++;
     q->counter--;
+    of->pQueue = q->counter;
 }
 
-void updateExamStatus(ExamList *el, ExamPriority *ep, int current_time) 
+void updateExamStatus(ExamList *el, ExamPriority *ep, int current_time, OftenReport *of) 
 {
     if (el->counter == 0) return;
 
@@ -99,6 +102,7 @@ void updateExamStatus(ExamList *el, ExamPriority *ep, int current_time)
             priorityNode->severity = node->severity;
             strcpy(priorityNode->condition, conditionName);
 
+            of->examDone++;
             insertPriority(ep, priorityNode);
             saveCondition(priorityNode);
             node = (prev == NULL) ? el->front : prev->next;

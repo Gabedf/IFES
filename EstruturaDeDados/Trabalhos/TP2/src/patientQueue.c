@@ -3,6 +3,7 @@
 #include <string.h>
 #include "patient.h"
 #include "examNode.h"
+#include "report.h"
 #include <time.h>
 
 Patient *create_patient(int id, const char *name, int arrival_time) 
@@ -32,7 +33,7 @@ pQueue *create_Queue()
     return q;
 }
 
-void insertPatient(pQueue *q, Patient *p)
+void insertPatient(pQueue *q, Patient *p, OftenReport *or)
 {
     pNode *node = (pNode*)(malloc(sizeof(pNode)));
     if (node == NULL) {
@@ -47,6 +48,7 @@ void insertPatient(pQueue *q, Patient *p)
 
     q->rear = node;
     q->counter++;
+    or->totalPatients++;
 }
 
 void savePatient(Patient *patient) {

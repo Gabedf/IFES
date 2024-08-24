@@ -1,6 +1,7 @@
 #ifndef MY_PATIENT
 #define MY_PATIENT
 #include <time.h>
+#include "oftenReport.h"
 
 typedef struct patient Patient;
 typedef struct p_queu pQueue;
@@ -33,7 +34,7 @@ Patient *create_patient(int id, const char *name, int arrival_time);
 pQueue *create_Queue();
 
 //
-void insertPatient(pQueue *q, Patient *p);
+void insertPatient(pQueue *q, Patient *p, OftenReport *or);
 
 //
 void savePatient(Patient *patient);

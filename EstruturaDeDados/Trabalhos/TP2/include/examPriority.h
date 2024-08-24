@@ -18,6 +18,7 @@ struct priorityNode {
     int severity;
     char condition[30];
     int conditionV;
+    int id;
 };
 
 ExamPriority *createPriorityList();

@@ -6,6 +6,7 @@
 #include "examPriority.h"
 #include "examNode.h"
 #include "patient.h"
+#include "oftenReport.h"
 
 typedef struct exam_list ExamList;
 
@@ -21,9 +22,9 @@ int full(ExamList *el);
 
 int empty(ExamList *el);
 
-void insertMachine(ExamList *el, pQueue *q, int current_time);
+void insertMachine(ExamList *el, pQueue *q, int current_time, OftenReport *of);
 
-void updateExamStatus(ExamList *el, ExamPriority *ep, int current_time);
+void updateExamStatus(ExamList *el, ExamPriority *ep, int current_time, OftenReport *of);
 
 void printMachine(ExamList *el);
 

@@ -12,6 +12,7 @@ int main() {
     pQueue *patientQueue = create_Queue();
     ExamPriority *examPriority = createPriorityList();
     Report *report = new_report();
+    OftenReport *oReport = new_OftenReport();
     int current_time = 0, end = 1, patient_id = 0;
 
     while (1) {
@@ -26,24 +27,22 @@ int main() {
             printf("Nome do Paciente: ");
             scanf("%s", patient_name);
 
-            Patient *new_patient = create_patient(patient_id, patient_name, current_time);
+            Patient *new_patient = create_patient( patient_id, patient_name, current_time);
             savePatient(new_patient);
-            insertPatient(patientQueue, new_patient);
+            insertPatient(patientQueue, new_patient, oReport);
             printPq(patientQueue);
             printMachine(examList);
             printPritority(examPriority);
-            insert_report(examPriority, report, current_time, examPriority->front->patient->patient->id);
-            print_report(report);
-            
+            insert_report(examPriority, report, current_time, oReport);
+            print_reportDone(oReport, current_time);
             printf("\nDigite '0' caso deseja encerrar ou '1' para continuar: ");
             scanf("%d", &end);
-            if (end == 0)  {break;}
+            if (end == 0)  { break;}
         }
 
-        insertMachine(examList, patientQueue, current_time);
+        insertMachine(examList, patientQueue, current_time, oReport);
 
-        updateExamStatus(examList, examPriority, current_time);
-
+        updateExamStatus(examList, examPriority, current_time, oReport);
         sleep(0.2);
     }
 
