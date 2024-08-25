@@ -1,7 +1,7 @@
 #ifndef MY_MACHINE
 #define MY_MACHINE
 
-#define EXAM_DURATION 4
+#define EXAM_DURATION 10
 
 #include "examPriority.h"
 #include "examNode.h"

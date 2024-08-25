@@ -79,10 +79,11 @@ void insert_report(ExamPriority *ep, Report *report, int current_time, OftenRepo
 void print_reportDone(OftenReport *of, int current_time)
 {
     if (of->startTime == 0) {of->startTime = current_time;}
-    if ((current_time - of->startTime) >= 5) {
+    if ((current_time - of->startTime) >= 30) {
         float percentualDone = ((float)of->reportDone / of->examDone) * 100;
         printf("\nRELATÓRIO TOTAL: ");
-        printf("\nPACIENTES TOTAL: %d\nPACIENTES EM FILA: %d\nEXAMES REALIZADOS: %d\nLAUDOS CONCLUÍDO: %d\nPORCENTAGEM PACIENTES COM LAUDO: %.2f\n\n", of->totalPatients, of->pQueue, of->examDone, of->reportDone, percentualDone);
+        printf("\nPACIENTES TOTAL: %d\nPACIENTES EM FILA: %d\nEXAMES REALIZADOS: %d\nLAUDOS CONCLUÍDO: %d\nPORCENTAGEM PACIENTES COM LAUDO: %.2f\n", of->totalPatients, of->pQueue, of->examDone, of->reportDone, percentualDone);
+        if ((current_time % 7200) == 0) {printf("NÚMERO TOTAL APÓS 7200 EXAMES: %d", of->examDone);}
         of->startTime = 0;
     }
 }

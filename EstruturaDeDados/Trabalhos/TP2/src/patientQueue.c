@@ -59,7 +59,7 @@ void savePatient(Patient *patient) {
         return;
     }
 
-    fprintf(file, "ID: %d, NAME: %s\n", patient->id, patient->name);
+    fprintf(file, "ID: %d, NOME: %s, HORÁRIO CHEGADA: %d\n", patient->id, patient->name, patient->arrival_time);
 
     fclose(file);
 }
