@@ -46,6 +46,9 @@
   <li><strong>Makefile:</strong> Arquivo de automação para compilar o projeto.</li>
 </ul>
 
+<h2>Escolha das Estruturas de Dados</h2>
+<p>Foi escolhida a utilização de filas ao longo do programa por uma questão de simplicidade e familiaridade com esse tipo de estrutura. As filas permitem gerenciar de forma eficiente a ordem de atendimento dos pacientes, a alocação de máquinas e a prioridade dos exames, o que é essencial para a simulação realista de um ambiente hospitalar.</p>
+
 <h2>Como Executar o Projeto</h2>
 
 <h3>Compilação</h3>
