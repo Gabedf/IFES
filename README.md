@@ -15,7 +15,7 @@
 
 <h3>Álgebra Linear - 3º Período</h3>
 
-p>A disciplina de Álgebra Linear (AL) é do terceiro período. Nela tenho pouco contato com programação e mais com a parte matemática, mas possuo um trabalho em que trabalho com convoluções e matrizes, na qual utilizei a linguagem Python por uma escolha pessoal.</p>
+<p>A disciplina de Álgebra Linear (AL) é do terceiro período. Nela tenho pouco contato com programação e mais com a parte matemática, mas possuo um trabalho em que trabalho com convoluções e matrizes, na qual utilizei a linguagem Python por uma escolha pessoal.</p>
   
 <li>Contém apenas um código "main.py" com o código do programa e uma imagem escolhida para teste.</li>
 
