@@ -1,6 +1,5 @@
 public class Pessoa {
-    public String nome;
-    public String cpf;
+    public String nome, cpf;
     public int idade;
     public char sexo;
 }

@@ -14,18 +14,28 @@ public class App {
         
         Conta c1 = new Conta();
         c1.numero = "1234-5";
-        c1.titular = p1; 
+        c1.titular = p1;
         c1.saldo = 100.0;
         c1.limite = 200.0;
         
         Conta c2 = new Conta();
-        c2.numero = "2345-6"; 
+        c2.numero = "2345-6";
         c2.titular = p2;
         c2.saldo = 150.0;
         c2.limite = 200.0;
         
-        System.out.println(c1.saldo);
-        System.out.println(c1.titular.nome);
-        System.out.println("Saldo da conta " + c2.numero + ": " + c2.saldo);
+        c1.extrato();
+        c2.extrato();
+        
+        c1.sacar(150);
+        c1.transferir(100, c2);
+        c1.sacar(100);
+        c1.depositar(100);
+        c1.transferir(200, c2);
+
+        for (int i = 1; i <= 120; i++) {
+            c1.chequeEspecial(0.5);
+            System.out.println("Saldo apos " + i + " dia(s): " + c1.saldo);
+        }
     }
 }
