@@ -1,23 +1,22 @@
 public class Conta {
+    // ATRIBUTES
     public String numero;
     public Pessoa titular;
     public double saldo, limite;
 
+    // METHODS
     public double disponivel() {
         return this.saldo + this.limite;
     }
-
     public void depositar(double valor) {
         this.saldo += valor;
     }
-
     public void extrato() {
         System.out.println("*** EXTRATO DA CONTA *** ");
         System.out.println("Conta: " + this.numero);
         System.out.println("Titular: " + this.titular.cpf);
         System.out.println("Saldo disponivel para saque: " + this.disponivel());
     }
-
     public boolean sacar(double valor) {
         if (valor <= this.disponivel()) {
             this.saldo -= valor;
@@ -29,7 +28,6 @@ public class Conta {
             return false;
         }
     }
-
     public boolean transferir(double valor, Conta destino) {
         if (this.sacar(valor)) {
             destino.depositar(valor);
@@ -41,11 +39,18 @@ public class Conta {
             return false;
         }
     }
-
     public void chequeEspecial(double juro) {
         if (this.saldo < 0) {
             this.saldo *= (1+(juro/100));
         }
     }
 
+    // SPECIAL METHODS
+    public Conta(String n, Pessoa pessoa) {
+        this.numero = n;
+        this.titular = pessoa; 
+        this.saldo = 0;
+        this.limite = 200;
+        System.out.println("Nova conta adicionada ao sistema.");
+    }
 }
