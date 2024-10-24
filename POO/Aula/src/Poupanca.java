@@ -1,24 +1,11 @@
-import java.util.Scanner;
-public class Conta {
-    // ATRIBUTES
-    public String numero;
-    public Pessoa titular;
-    public Gerente gerente;
-    public Data dCriacao;
-    public double saldo;
-
+public class Poupanca extends Conta{
     // METHODS
-    public void depositar(double valor) {
-        this.saldo += valor;
-    }
     public double disponivel() {
         return this.saldo;
     }
     public void extrato() {
-        System.out.println("*** EXTRATO DA CONTA *** ");
-        System.out.println("Conta: " + this.numero);
-        System.out.println("Titular: " + this.titular.cpf);
-        System.out.println("Saldo disponivel para saque: " + this.disponivel());
+        System.out.println("*** EXTRATO DA CONTA - POUPANCA *** ");
+        super.extrato();
     }
     public boolean sacar(double valor) {
         if (valor <= this.disponivel()) {
@@ -43,17 +30,7 @@ public class Conta {
         }
     }
     // SPECIAL METHODS
-    public Conta(Gerente g) {
-        Scanner s = new Scanner(System.in);
-
-        System.out.println("Digite o numero da conta: ");
-        this.numero = s.nextLine();
-        this.titular = new Pessoa(); 
-        this.dCriacao = new Data();
-
-        this.gerente = g;
-        this.saldo = 0;
-        System.out.println("Nova conta adicionada ao sistema.");
-        s.close();
+    public Poupanca(Gerente g) {
+        super(g);
     }
 }
