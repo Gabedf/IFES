@@ -1,7 +1,7 @@
 import java.util.Scanner;
 public class ContaCorrente extends Conta {
     // ATRIBUTES
-    public double limite;
+    private double limite;
 
     // METHODS
     public void extrato() {
@@ -13,21 +13,26 @@ public class ContaCorrente extends Conta {
             this.saldo *= (1+(juro/100));
         }
     }
-    public double disponivel() {
+    protected double disponivel() {
         return this.saldo + this.limite;
     }
     public void alterarLimite() {
         if (this.gerente.validarAcesso()) {
-            System.out.println("Digite o novo limite: ");
+            System.out.print("Digite o novo limite: ");
             Scanner s = new Scanner(System.in);
             this.limite = s.nextDouble();
-            s.close();
-        } else {System.out.println("Não possível alterar limite.");}
+        } else {System.out.println("Nao possível alterar limite.");}
     }
     
     // SPECIAL METHODS
     public ContaCorrente(Gerente g) {
         super(g);
-        this.limite = 200;
+        this.setLimite(limite);
+    }
+    public double getLimite() {
+        return limite;
+    }
+    public void setLimite(double limite) {
+        this.limite = limite;
     }
 }

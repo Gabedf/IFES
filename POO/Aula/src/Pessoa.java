@@ -1,34 +1,33 @@
 import java.util.Scanner;
 public class Pessoa {
     // ATRIBUTES
-    public String nome, cpf;
-    public Data dtNasc;
-    public char sexo;
+    protected String nome, cpf;
+    protected Data dtNasc;
+    protected char sexo;
 
     // METHODS
     public int idade(Data hoje) {
-        if (hoje.mes < this.dtNasc.mes) {
-            return (hoje.ano - this.dtNasc.ano) - 1;
-        } else {return (hoje.ano - this.dtNasc.ano);}
+        if (hoje.getMes() < this.dtNasc.getMes()) {
+            return (hoje.getAno() - this.dtNasc.getAno()) - 1;
+        } else {return (hoje.getAno() - this.dtNasc.getAno());}
     }
 
     // SPECIAL METHODS
     public Pessoa() {
         Scanner s = new Scanner(System.in);
+        System.out.print("\n# ---- CRIACAO NOVA PESSOA  ---- #\n");
 
-        System.out.println("Digite o nome da pessoa: ");
+        System.out.print("Digite o nome da pessoa: ");
         this.nome = s.nextLine();
 
-        System.out.println("Digite o CPF  da pessoa: ");
+        System.out.print("Digite o CPF  da pessoa: ");
         this.cpf = s.nextLine();
 
-        System.out.println("Digite o sexo: ");
+        System.out.print("Digite o sexo: ");
         this.sexo = s.nextLine().charAt(0);
 
-        System.out.println("Digite a data de nascimento: ");
         this.dtNasc = new Data();
-    
-        s.close();
+
     }
 
     public Pessoa(String nome, String cpf, Data dtNasc, char sexo) {

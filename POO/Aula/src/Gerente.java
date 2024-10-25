@@ -1,17 +1,16 @@
 import java.util.Scanner;
 public class Gerente extends Pessoa {
     // ATRIBUTES
-    public String matricula, senha;
+    private String matricula, senha;
 
-    // 
+    // METHODS
     public boolean validarAcesso(String s) {
         return s.equals(this.senha);
     }
     public boolean validarAcesso() {
         Scanner s = new Scanner(System.in);
-        System.out.println("Digite sua senha: ");
+        System.out.print("\nDigite sua senha: ");
         String senha = s.nextLine();
-        s.close();
 
         return this.validarAcesso(senha);
     }
@@ -21,18 +20,26 @@ public class Gerente extends Pessoa {
         super();
         Scanner s = new Scanner(System.in);
 
-        System.out.println("Digite a matricula: ");
-        this.matricula = s.nextLine();
+        System.out.print("Digite a matricula: ");
+        this.setMatricula(s.nextLine());
 
-        System.out.println("Digite a senha: ");
-        this.senha = s.nextLine();
+        System.out.print("Digite a senha: ");
+        this.setSenha(s.nextLine());
 
-        s.close();
     }
 
     public Gerente(String nome, String cpf, Data dtNasc, char sexo, String m, String s) {
         super(nome, cpf, dtNasc, sexo);
-        this.matricula = m;
-        this.senha = s;
+        this.setMatricula(m);
+        this.setSenha(s);
+    }
+    public String getMatricula() {
+        return matricula;
+    }
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 }

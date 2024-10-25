@@ -1,21 +1,21 @@
 import java.util.Scanner;
 public class Conta {
     // ATRIBUTES
-    public String numero;
-    public Pessoa titular;
-    public Gerente gerente;
-    public Data dCriacao;
-    public double saldo;
+    protected String numero;
+    protected Pessoa titular;
+    protected Gerente gerente;
+    protected Data dCriacao;
+    protected double saldo;
 
     // METHODS
     public void depositar(double valor) {
         this.saldo += valor;
     }
-    public double disponivel() {
+    protected double disponivel() {
         return this.saldo;
     }
     public void extrato() {
-        System.out.println("*** EXTRATO DA CONTA *** ");
+        System.out.println("\n*** EXTRATO DA CONTA *** ");
         System.out.println("Conta: " + this.numero);
         System.out.println("Titular: " + this.titular.cpf);
         System.out.println("Saldo disponivel para saque: " + this.disponivel());
@@ -45,15 +45,17 @@ public class Conta {
     // SPECIAL METHODS
     public Conta(Gerente g) {
         Scanner s = new Scanner(System.in);
-
-        System.out.println("Digite o numero da conta: ");
+        System.out.print("\n# ---- CRIACAO NOVA CONTA  ---- #\n");
+        System.out.print("Digite o numero da conta: ");
         this.numero = s.nextLine();
+
         this.titular = new Pessoa(); 
+
+        System.out.print("\n# ---- Data criacao conta  ---- #\n");
         this.dCriacao = new Data();
 
         this.gerente = g;
         this.saldo = 0;
         System.out.println("Nova conta adicionada ao sistema.");
-        s.close();
     }
 }
