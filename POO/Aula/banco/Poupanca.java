@@ -30,7 +30,7 @@ public class Poupanca extends Conta{
         }
     }
     // SPECIAL METHODS
-    public Poupanca(Gerente g) {
-        super(g);
+    public Poupanca(Pessoa t, Gerente g) {
+        super(t, g);
     }
 }

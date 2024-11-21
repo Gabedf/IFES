@@ -11,6 +11,12 @@ public class Conta {
     public void depositar(double valor) {
         this.saldo += valor;
     }
+    public void depositar() {
+        Scanner s = new Scanner(System.in);
+        System.out.println("Digite o valor a ser depositado: ");
+        double v = s.nextDouble();
+        depositar(v);
+    }
     protected double disponivel() {
         return this.saldo;
     }
@@ -31,6 +37,12 @@ public class Conta {
             return false;
         }
     }
+    public boolean sacar() {
+        Scanner s = new Scanner(System.in);
+        System.out.println("Digite o valor a ser sacado: ");
+        double v = s.nextDouble();
+        return sacar(v);
+    }
     public boolean transferir(double valor, Conta destino) {
         if (this.sacar(valor)) {
             destino.depositar(valor);
@@ -42,8 +54,14 @@ public class Conta {
             return false;
         }
     }
+    public boolean transferir(Conta destino) {
+        Scanner s = new Scanner(System.in);
+        System.out.println("Digite o valor a ser transferido: ");
+        double v = s.nextDouble();
+        return transferir(v, destino);
+    }
     // SPECIAL METHODS
-    public Conta(Gerente g) {
+    public Conta(Pessoa t, Gerente g) {
         Scanner s = new Scanner(System.in);
         System.out.print("\n# ---- CRIACAO NOVA CONTA  ---- #\n");
         System.out.print("Digite o numero da conta: ");

@@ -25,8 +25,8 @@ public class ContaCorrente extends Conta {
     }
     
     // SPECIAL METHODS
-    public ContaCorrente(Gerente g) {
-        super(g);
+    public ContaCorrente(Pessoa t, Gerente g) {
+        super(t, g);
         this.setLimite(limite);
     }
     public double getLimite() {
