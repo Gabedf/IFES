@@ -1,7 +1,7 @@
-package pessoa;
 public class Pessoa {
     // ATRIBUTES
     private String nome;
+    private Data dt_nascimento;
 
     // METHODS
 

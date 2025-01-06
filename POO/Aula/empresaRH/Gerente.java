@@ -47,7 +47,7 @@ public class Gerente extends Funcionario {
     }
     public void alterarSenha() {
          if (validarAcesso()) {
-            System.out.print("Digite sua senha: ");
+            System.out.print("Digite sua nova senha: ");
             setSenha(s.nextLine());
          }
     }

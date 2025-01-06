@@ -1,19 +1,18 @@
-package pessoa;
-import Data;
-
-public class Usuario {
+public class Usuario extends Pessoa {
     // ATRIBUTES
-    private String email, cpf;
-    private int senha;
-
+    private String email, cpf, senha;
+    private boolean pendencias;
+    private double saldo;
     // METHODS
-    
 
     // SPECIAL METHODS
-    public Usuario(String email, String cpf, int senha) {
+    public Usuario(String nome, String email, String cpf, String senha) {
+        super(nome);
         setEmail(email);
         setCpf(cpf);
         setSenha(senha);
+        this.pendencias = false;
+        this.saldo = 0;
     }
     public String getEmail() {
         return email;
@@ -27,10 +26,10 @@ public class Usuario {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-    public int getSenha() {
+    private String getSenha() {
         return senha;
     }
-    public void setSenha(int senha) {
+    public void setSenha(String senha) {
         this.senha = senha;
     }
 }
