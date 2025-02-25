@@ -1,43 +1,36 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Repositório de Matérias da Faculdade - IFES</title>
-</head>
-<body>
+# Calculadora de Juros Compostos
 
-<h1>Repositório de Matérias da Faculdade - IFES</h1>
+Este repositório contém o código de uma **Calculadora de Juros Compostos**, com funcionalidades que permitem ao usuário calcular o montante final de um investimento, levando em consideração a taxa de juros, tempo de aplicação, e contribuições periódicas. O programa também pode exibir um gráfico de evolução do montante ao longo do tempo.
 
-<p>Este repositório contém materiais e recursos relacionados aos cursos que estou cursando na faculdade no Instituto Federal do Espírito Santo (IFES). A ideia é centralizar tudo em um único lugar para fácil acesso e referência. O repositório foi criado em de Julho de 2024, atualmente estou no quarto período da faculdade.</p>
+## Estrutura do Repositório
 
-<h2>Estrutura do Repositório</h2>
+### **Calculator.py** - Classe principal da calculadora
 
-<h3>Álgebra Linear - 3º Período</h3>
+O arquivo `calculator.py` contém a classe `Calculator`, que possui os métodos necessários para realizar o cálculo do montante final, simular contribuições periódicas e gerar o gráfico do crescimento do investimento.
 
-<p>A disciplina de Álgebra Linear (AL) é do terceiro período. Nela tenho pouco contato com programação e mais com a parte matemática, mas possuo um trabalho em que trabalho com convoluções e matrizes, na qual utilizei a linguagem Python por uma escolha pessoal.</p>
-  
-<li>Contém apenas um código "main.py" com o código do programa e uma imagem escolhida para teste.</li>
+- **Métodos:**
+  - `tipoTempo`: Define a unidade de tempo (ano, mês ou dia) para o cálculo.
+  - `calcularMontanteFinal`: Calcula o montante final do investimento sem contribuições periódicas.
+  - `simularContribuicoes`: Calcula o montante final levando em consideração as contribuições periódicas.
+  - `plotarGrafico`: Gera um gráfico mostrando a evolução do montante ao longo do tempo.
 
-<h3>Estrutura de Dados - 3º Período</h3>
+### **Graphics.py** - Função de Exibição de Gráfico
 
-<p>A disciplina de Estrutura de Dados (ED) é do terceiro período. Até este momento, não tivemos contato com a linguagem C, por isso parte do conteúdo é destinado a ensinar o básico sobre a linguagem, como loops, declaração de variáveis, alocação de memória e criação de estruturas.</p>
+O arquivo `graphics.py` contém a função `plotar_grafico`, que é responsável por gerar e exibir um gráfico mostrando a evolução do montante ao longo do tempo.
 
-<ul>
-  <li><strong>Trabalhos:</strong> Contém trabalhos e atividades realizados na matéria.</li>
-  <li><strong>Individuais:</strong> Contém estudos adicionais realizados por mim para aprimorar meu conhecimento na matéria, mas que não foram obrigatórios ou avaliados.</li>
-</ul>
+### **Main.py** - Arquivo Principal
 
-<h3>Programação Orientada a Objetos - 4º Período</h3>
+O arquivo `main.py` é o ponto de entrada do programa. Ele permite a interação com o usuário, oferecendo um menu de opções para:
+1. Definir a unidade de tempo (ano, mês ou dia).
+2. Calcular o montante final sem contribuições.
+3. Simular o montante com contribuições periódicas.
+4. Exibir o gráfico de evolução do investimento.
+5. Encerrar o programa.
 
-<p>A disciplina de Programação Orientada a Objetos (POO) é do quarto período. Apesar de não ter tido contato previamente com Java dentro do curso, a disciplina possue um foco em explicar POO enquanto vai explicando Java. Cada semana um novo conteúdo é adicionado de acordo com o que é visto na aula e posto em prática.</p>
+## Como Usar
 
-<ul>
-  <li><strong>Aulas:</strong> Contém as atividades práticas feitas em sala de aula.</li>
-  <li><strong>Individuais:</strong> Contém estudos adicionais realizados por mim para aprimorar meu conhecimento na matéria, mas que não foram obrigatórios ou avaliados.</li>
-</ul>
+1. Clone este repositório para sua máquina local.
+2. Instale a biblioteca `matplotlib` para gerar gráficos:
 
-<p><em>By Gabriel Leite Fonseca</em></p>
-
-</body>
-</html>
+```bash
+pip install matplotlib
