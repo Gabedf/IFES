@@ -18,7 +18,9 @@ public class Usuario {
     public String getNome() {
         return nome;
     }
-    
+    public String getSenha() {
+        return senha;
+    }
     // METODOS
     public void criarSenha(String psw) {
         if (this.senha == null) {

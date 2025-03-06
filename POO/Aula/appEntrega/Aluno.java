@@ -7,7 +7,7 @@ public class Aluno extends Usuario {
         super(cpf, nome, senha);
         this.saldo = 0;
     }
-    
+
     // METODOS
     public String toString() {
         return super.toString() + " (Saldo: R$" + String.format("%.2f", this.saldo) + ")";

@@ -37,6 +37,23 @@
   <li><strong>Individuais:</strong> Contém estudos adicionais realizados por mim para aprimorar meu conhecimento na matéria, mas que não foram obrigatórios ou avaliados.</li>
 </ul>
 
+<h3>Projetos De Sistemas - 5º Período</h3>
+
+<p>BLABLA PS</p>
+
+<ul>
+  <li><strong>Aulas:</strong> Contém as atividades práticas feitas em sala de aula.</li>
+  <li><strong>Individuais:</strong> Contém estudos adicionais realizados por mim para aprimorar meu conhecimento na matéria, mas que não foram obrigatórios ou avaliados.</li>
+
+</ul><h3>Desenvolvimento Web - 5º Período</h3>
+
+<p>Desenvolvimento Web Desenvolvimento Web Desenvolvimento Web Desenvolvimento Web Desenvolvimento Web Desenvolvimento Web </p>
+
+<ul>
+  <li><strong>Aulas:</strong> Contém as atividades práticas feitas em sala de aula.</li>
+  <li><strong>Individuais:</strong> Contém estudos adicionais realizados por mim para aprimorar meu conhecimento na matéria, mas que não foram obrigatórios ou avaliados.</li>
+</ul>
+
 <p><em>By Gabriel Leite Fonseca</em></p>
 
 </body>

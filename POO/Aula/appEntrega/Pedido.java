@@ -36,6 +36,10 @@ public class Pedido {
     public boolean isEntregue() {
         return entregue;
     }
+    public String getStatus() {
+        if (this.entregue) {return "Entregue";}
+        else {return "Em aberto";} 
+    }
 
     // METODOS
     public String toString() {
@@ -90,5 +94,12 @@ public class Pedido {
         for (Item item : this.carrinho) {
             item.getP().retirarDeEstoque(item.getQtd());;
         }
+    }
+    public int totalItens() {
+        int total = 0;
+        for (Item item : this.carrinho) {
+            total += 1; 
+        }
+        return total;
     }
 }

@@ -6,8 +6,10 @@ public class Admin extends Usuario {
     public Admin(String cpf, String nome, String senha, String email) {
         super(cpf, nome, senha);
         this.email = email;
+    }  
+    public String getEmail() {
+        return email;
     }
-
     // METODOS
     public String toString() {
         return super.toString() + "(ADMIN)";

@@ -1,4 +1,10 @@
 import java.util.ArrayList;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.IOException;
+
 public class Sistema {
     // ATRIBUTOS
     private ArrayList<Aluno> alunos;
@@ -96,5 +102,55 @@ public class Sistema {
             }
         }
         return filtrados;
+    }
+    public void carregarDados(String caminhoArquivo) {
+        try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
+            String linha;
+            while ((linha = br.readLine()) != null) {
+                if (linha.equals("ADM")) {
+                    String cpf = br.readLine();
+                    String nome = br.readLine();
+                    String senha = br.readLine();
+                    String email = br.readLine();
+                    Admin admin = new Admin(cpf, nome, senha, email);
+                    this.addAdmin(admin);
+                } else if (linha.equals("ALU")) {
+                    String cpf = br.readLine();
+                    String nome = br.readLine();
+                    String senha = br.readLine();
+                    Aluno aluno = new Aluno(cpf, nome, senha);
+                    this.addAluno(aluno);
+                } else if (linha.equals("FIM")) {
+                    break;
+                }
+            }
+            System.out.println("Dados carregados com sucesso!");
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar o arquivo: " + e.getMessage());
+        }
+    }
+
+    public void salvarDados(String caminhoArquivo) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(caminhoArquivo))) {
+            for (Admin admin : this.admins) {
+                bw.write("ADM\n");
+                bw.write(admin.getCpf() + "\n");
+                bw.write(admin.getNome() + "\n");
+                bw.write(admin.getSenha() + "\n");
+                bw.write(admin.getEmail() + "\n");
+            }
+
+            for (Aluno aluno : this.alunos) {
+                bw.write("ALU\n");
+                bw.write(aluno.getCpf() + "\n");
+                bw.write(aluno.getNome() + "\n");
+                bw.write(aluno.getSenha() + "\n");
+            }
+
+            bw.write("FIM\n");
+            System.out.println("Dados salvos com sucesso!");
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar o arquivo: " + e.getMessage());
+        }
     }
 }

@@ -2,7 +2,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Locale;
+import java.util.NoSuchElementException;
 /**
  * Classe com rotinas de entrada e saída
  * @author Hilario Seibel Junior
@@ -23,7 +26,7 @@ public class Entrada {
     public Entrada() {
         try {
             // Se houver um arquivo input.txt na pasta corrente, o Scanner vai ler dele.
-            this.input = new Scanner(new FileInputStream("input.txt")).useLocale(Locale.US);
+            this.input = new Scanner(new FileInputStream("entrada.txt")).useLocale(Locale.US);
             // NAO ALTERE A LOCALICAÇÃO DO ARQUIVO!!
         } catch (FileNotFoundException e) {
             // Caso contrário, vai ler do teclado.
@@ -46,27 +49,37 @@ public class Entrada {
         while (linha.charAt(0) == '#') linha = this.input.nextLine();
         return linha;
     }
-
+    
     /**
      * Faz a leitura de um número inteiro
      * @param msg: Mensagem que será exibida ao usuário
      * @return O número digitado pelo usuário convertido para int
      */
-    private int lerInteiro(String msg) {
-        // Imprime uma mensagem ao usuário, lê uma linha contendo um inteiro e retorna este inteiro
-        String linha = this.lerLinha(msg);
-        return Integer.parseInt(linha);
+    public int lerInteiro(String msg) {
+        while (true) {
+            try {
+                String linha = this.lerLinha(msg); // Usa lerLinha para ignorar comentários
+                return Integer.parseInt(linha);
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida. Digite um número inteiro.");
+            }
+        }
     }
-
     /**
      * Faz a leitura de um ponto flutuante
      * @param msg: Mensagem que será exibida ao usuário
      * @return O número digitado pelo usuário convertido para double
      */
-    private double lerDouble(String msg) {
-        // Imprime uma mensagem ao usuário, lê uma linha contendo um ponto flutuante e retorna este número
-        String linha = this.lerLinha(msg);
-        return Double.parseDouble(linha);
+
+     public double lerDouble(String msg) {
+        while (true) {
+            try {
+                System.out.print(msg);
+                return Double.parseDouble(input.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida. Digite um número decimal.");
+            }
+        }
     }
     private Sala lerSala(Sistema s) {
         s.listarSalas();
@@ -74,20 +87,34 @@ public class Entrada {
         Sala sala = s.getSala(nomeSala); 
         return sala;
     }
-    private Item lerItem(Sistema s) {
+    public Item lerItem(Sistema s) {
         Produto produto = null;
         while (produto == null) {
-            s.listarProdutos(); 
-            String codProduto = this.lerLinha("\nDigite o código do produto: "); 
-            produto = s.getProduto(codProduto); 
+            s.listarProdutos();
+            String codProduto = this.lerLinha("\nDigite o código do produto: ");
+            if (codProduto == null) { 
+                System.out.println("Operação cancelada.");
+                return null;
+            }
+    
+            produto = s.getProduto(codProduto);
+    
+            if (produto == null) {
+                System.out.println("Produto não encontrado. Tente novamente.");
+            }
         }
-        
-        int quantidade = this.lerInteiro("\nDigite a quantidade desejada (máximo " + produto.getQtd() + "): ");
-        while (quantidade > produto.getQtd()) {
+    
+        int quantidade = -1;
+        while (quantidade <= 0 || quantidade > produto.getQtd()) {
             quantidade = this.lerInteiro("\nDigite a quantidade desejada (máximo " + produto.getQtd() + "): ");
+            if (quantidade <= 0 || quantidade > produto.getQtd()) {
+                System.out.println("Quantidade inválida. Tente novamente.");
+            }
         }
-        return new Item(produto, quantidade); 
+    
+        return new Item(produto, quantidade);
     }
+    
     
     // MENU SISTEMA
     public void menu(Sistema s) {
@@ -211,65 +238,112 @@ public class Entrada {
         public void fazerPedido(Aluno a, Sistema s) {
             Sala sala = this.lerSala(s);
             Pedido pedido = new Pedido(s.gerarCodigoPedido(), a, sala);
-            
+        
             while (true) {
                 String msg = "\n*********************\n" +
-                "Escolha uma opção:\n" +
-                "1) Inserir produto no carrinho.\n" +
-                "2) Fechar pedido.\n";
+                        "Escolha uma opção:\n" +
+                        "1) Inserir produto no carrinho.\n" +
+                        "2) Fechar pedido.\n";
                 int escolha = this.lerInteiro(msg);
-
+        
                 if (escolha == 1) {
                     Item item = this.lerItem(s);
-                    if ((item.getQtd() <= item.getP().getQtd())) {
+                    if (item == null) {  
+                        System.out.println("Operação cancelada ao adicionar item.");
+                        return;
+                    }
+        
+                    if (item.getQtd() <= item.getP().getQtd()) {
                         pedido.adicionarItem(item.getP(), item.getQtd());
                         System.out.println("Produto adicionado ao carrinho com sucesso!");
+                    } else {
+                        System.out.println("Quantidade superior ao estoque. Operação cancelada.");
                     }
-                    else {
-                        System.out.println("Operação cancelada.");
+                } else if (escolha == 2) {
+                    if (pedido.getCarrinho().isEmpty()) {
+                        System.out.println("Carrinho vazio. Pedido cancelado.");
+                        return;
                     }
-                } 
-                
-                else if (escolha == 2) {
+        
                     if (a.retirarSaldo(pedido.valorTotal())) {
                         pedido.confirmar();
                         s.addPedido(pedido);
-                        System.out.println("Pedido concluido!");
-                        return; 
-                    }
-                    else {
-                        System.out.println("Saldo insuficiente.");
+                        System.out.println("Pedido concluído!");
+                        return;
+                    } else {
+                        System.out.println("Saldo insuficiente. Pedido cancelado.");
                         return;
                     }
+                } else {
+                    System.out.println("Opção inválida. Tente novamente.");
                 }
-
-                else {System.out.println("Opção inválida. Tente novamente.");}
             }
         }
+        
         public void entregarPedido(Aluno a, Sistema s) {
             ArrayList<Pedido> pedidosDisponiveis = s.filtrarPedidos(true);
             System.out.println("\n#---LISTAGEM PEDIDOS DISPONIVEIS---#");
             for (Pedido pedido : pedidosDisponiveis) {
                 System.out.println(pedido.toString());
             }
+        
             String escolha = this.lerLinha("\nDigite o codigo do pedido: ");
-            Pedido pedido = s.getPedido(escolha);
-            pedido.atribuirEntregador(a);
-            pedido.marcarComoEntregue();
-
-        }
-        public void listarPedido(Aluno a, Sistema s) {
-            ArrayList<Pedido> p = s.filtrarPedidos(a);
-            if (p == null) {
-                System.out.println("Pedidos não encontrados.");
+            if (escolha == null) { // Verifica se houve cancelamento ou erro na leitura
+                System.out.println("Operação cancelada.");
                 return;
             }
-            System.out.println("\nPedidos de " + a.toString() + "\n*");
-            for (Pedido pedido : p) {
-                System.out.print(pedido.toString(true));
+        
+            Pedido pedido = s.getPedido(escolha);
+            if (pedido == null) { // Verifica se o pedido foi encontrado
+                System.out.println("Pedido não encontrado. Operação cancelada.");
+                return;
+            }
+        
+            pedido.atribuirEntregador(a);
+            pedido.marcarComoEntregue();
+            System.out.println("Pedido " + pedido.getCod() + " entregue com sucesso!");
+        }
+        
+        public void listarPedido(Aluno a, Sistema s) {
+            ArrayList<Pedido> pedidosAluno = s.filtrarPedidos(a);
+        
+            if (pedidosAluno == null || pedidosAluno.isEmpty()) {
+                System.out.println("Nenhum pedido encontrado.");
+                return;
+            }
+        
+            // Ordena os pedidos conforme a quantidade de produtos diferentes e valor total
+            pedidosAluno.sort((p1, p2) -> {
+                int qtdProdutosDiferentesP1 = p1.getCarrinho().size();
+                int qtdProdutosDiferentesP2 = p2.getCarrinho().size();
+        
+                if (qtdProdutosDiferentesP1 != qtdProdutosDiferentesP2) {
+                    return Integer.compare(qtdProdutosDiferentesP2, qtdProdutosDiferentesP1);
+                }
+        
+                return Double.compare(p2.valorTotal(), p1.valorTotal());
+            });
+        
+            System.out.println(a.toString());
+            System.out.println("*");
+        
+            for (Pedido pedido : pedidosAluno) {
+                System.out.println("Código do Pedido: " + pedido.getCod());
+        
+                List<Item> itensOrdenados = new ArrayList<>(pedido.getCarrinho());
+                itensOrdenados.sort((i1, i2) -> Integer.compare(i2.getQtd(), i1.getQtd()));
+        
+                System.out.println("Produtos:");
+                for (Item item : itensOrdenados) {
+                    System.out.printf(item.toString(true) + "\n");
+                }
+        
+                System.out.println("Status: " + pedido.getStatus());
+                System.out.printf("Valor Total: R$%.2f\n", pedido.valorTotal());
                 System.out.println("*");
             }
         }
+        
         public void inserirCredito(Aluno a, Sistema s) {
             double valor = -1;
             while (valor <= 0) {
