@@ -1,0 +1,5 @@
+﻿  Main.c
+C:\Users\gabdo\Desktop\dev\C\TrabalhoPThreads\TrabalhoPThreads\Main.c(21,12): warning C4101: 'j': variável local não referenciada
+C:\Users\gabdo\Desktop\dev\C\TrabalhoPThreads\TrabalhoPThreads\Main.c(55,13): warning C4244: 'inicializando': conversão de 'double' para 'int', possível perda de dados
+C:\Users\gabdo\Desktop\dev\C\TrabalhoPThreads\TrabalhoPThreads\Main.c(52,1): warning C4716: 'gerarMatriz': deve retornar um valor
+  TrabalhoPThreads.vcxproj -> C:\Users\gabdo\Desktop\dev\C\TrabalhoPThreads\x64\Debug\TrabalhoPThreads.exe
