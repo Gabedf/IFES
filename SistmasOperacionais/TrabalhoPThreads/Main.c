@@ -16,22 +16,22 @@ int qtd_submatrizes(int i, int j, int sub_i, int sub_j) {
     return ((i - sub_i + 1) * (j - sub_j + 1));
 }
 
-// ALOCAR ESPAÇO PARA MATRIZ
+// ALOCAR ESPAï¿½O PARA MATRIZ
 int** alocarMatriz() {
     int i, j;
 
-    // ALOCAR ESPAÇO PARA LINHAS
+    // ALOCAR ESPAï¿½O PARA LINHAS
     matriz = calloc(LINHAS, sizeof(int*));
     if (matriz == NULL) {
-        printf("Erro ao alocar memória.\n");
+        printf("Erro ao alocar memï¿½ria.\n");
         return (NULL);
     }
 
-    // ALOCAR ESPAÇO PARA COLUNAS
+    // ALOCAR ESPAï¿½O PARA COLUNAS
     for (i = 0; i < LINHAS; i++) {
         matriz[i] = (int*)malloc(COLUNAS * sizeof(int));
         if (matriz[i] == NULL) {
-            printf("Erro ao alocar memória.\n");
+            printf("Erro ao alocar memï¿½ria.\n");
             return (NULL);
         }
     }
@@ -39,7 +39,7 @@ int** alocarMatriz() {
     return matriz;
 }
 
-// LIBERAR MEMÓRIA ALOCADA
+// LIBERAR MEMï¿½RIA ALOCADA
 void liberarMatriz() {
     for (int i = 0; i < LINHAS; i++) {
         free(matriz[i]);
@@ -47,7 +47,7 @@ void liberarMatriz() {
     free(matriz);
 }
 
-// RETORNAR SE UM NÚMERO É OU NÃO PRIMO
+// RETORNAR SE UM Nï¿½MERO ï¿½ OU Nï¿½O PRIMO
 int ehPrimo(int numero) {
 	if (numero <= 1) { return 0; }
 	int raiz = sqrt(numero);
@@ -59,7 +59,7 @@ int ehPrimo(int numero) {
 	return 1;
 }
 
-// FUNÇÃO PRINCIPAL
+// FUNï¿½ï¿½O PRINCIPAL
 int main() {
 
     matriz = alocarMatriz();
@@ -82,7 +82,7 @@ int main() {
     fim = clock();
     tempo_gasto = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
     
-    printf("Tempo de execução: %.3f segundos\n", tempo_gasto);
+    printf("Tempo de execuï¿½ï¿½o: %.3f segundos\n", tempo_gasto);
     printf("\nQuantidade de primos: %d\n", contador);
 
     liberarMatriz(matriz, LINHAS);
